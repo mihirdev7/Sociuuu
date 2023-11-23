@@ -22,34 +22,43 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Discover"
+                android:text="Sociuuu"
                 android:textSize="30sp"
                 android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/profileicnfeed"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:layout_marginEnd="8dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/profile_icon"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crdvw"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="6dp"
+                app:cardCornerRadius="100dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView2" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/profileicnfeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+            </androidx.cardview.widget.CardView>
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
+                android:layout_marginTop="4dp"
                 android:layout_height="1sp"
-                android:layout_marginTop="16dp"
                 android:background="#2A2828"
-                app:layout_constraintEnd_toEndOf="@+id/profileicnfeed"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/profileicnfeed" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/crdvw"
+                app:layout_constraintTop_toBottomOf="@+id/crdvw" />
 
 
             <HorizontalScrollView

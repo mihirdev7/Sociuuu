@@ -1,7 +1,9 @@
 package com.example.socialapp.fragments;
 
 import static com.example.socialapp.R.id.commentid;
+import static com.example.socialapp.R.id.imageView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.socialapp.R;
 //import com.example.socialapp.adapters.feedAdapterHome;
@@ -47,7 +50,7 @@ import java.util.Date;
 public class home extends Fragment {
 
     RecyclerView Recyid,recyfeed;
-    ImageView imageView5,imageView2,profileicnfeed;
+    ImageView imageView5,imageView2,profileicnfeed,imgcir;
     ArrayList<storyModel> llist;
    ArrayList<PostModel> feedlist;
     ProgressDialog dialog;
@@ -57,6 +60,7 @@ public class home extends Fragment {
 
    FirebaseDatabase database;
    ActivityResultLauncher<String> gallerylauncher;
+    authInfoSignInModel k;
     public home(){
     }
 
@@ -79,12 +83,16 @@ public class home extends Fragment {
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
 
+        //==========================profile image set===============================================
+
         database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        authInfoSignInModel k=snapshot.getValue(authInfoSignInModel.class);
-                        Picasso.get().load(k.getProfilePhoto()).into(profileicnfeed);
+                         k=snapshot.getValue(authInfoSignInModel.class);
+                        Picasso.get()
+                                .load(k.getProfilePhoto())
+                                .into(profileicnfeed);
                     }
 
                     @Override
@@ -93,6 +101,23 @@ public class home extends Fragment {
                     }
                 });
 
+        profileicnfeed.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Dialog dg=new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+                dg.setContentView(R.layout.profile_circleimg);
+                 imgcir=dg.findViewById(R.id.imgcircle);
+                Picasso.get().load(k.getProfilePhoto()).into(imgcir);
+                imgcir.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dg.dismiss();
+                    }
+                });
+                dg.show();
+                return true;
+            }
+        });
 
 
         //==============================================story show code=============================================
