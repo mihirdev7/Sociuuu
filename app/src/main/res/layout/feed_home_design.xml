@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/profileicnfeed"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/circle_iconborder"
+        android:scaleType="fitXY"
+        android:src="@drawable/profile_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nameFeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Mihir devda"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/profileicnfeed"
+        app:layout_constraintStart_toEndOf="@+id/profileicnfeed"
+        app:layout_constraintTop_toTopOf="@+id/profileicnfeed"
+        app:layout_constraintVertical_bias="0.39" />
+
+    <TextView
+        android:id="@+id/aboutFeedHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="top"
+        android:layout_marginStart="8dp"
+        android:hint="text"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/profileicnfeed"
+        app:layout_constraintTop_toBottomOf="@+id/profileicnfeed" />
+
+    <ImageView
+        android:id="@+id/editFeedHome"
+        android:layout_width="23dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileicnfeed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profileicnfeed"
+        app:srcCompat="@drawable/feed_home_edit_icn" />
+
+    <ImageView
+        android:id="@+id/postImgFeed"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutFeedHome"
+        app:srcCompat="@drawable/icn" />
+
+    <ImageView
+        android:id="@+id/postSaveimgId"
+        android:layout_width="34dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/postImgFeed"
+        app:layout_constraintTop_toTopOf="@+id/postImgFeed"
+        app:srcCompat="@drawable/icn_save_post_home" />
+
+    <TextView
+        android:id="@+id/likeid"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text=""
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/like_home_icon"
+        app:layout_constraintStart_toStartOf="@+id/postImgFeed"
+        app:layout_constraintTop_toBottomOf="@+id/postImgFeed"
+       />
+
+    <TextView
+        android:id="@+id/commentid"
+        android:layout_width="50dp"
+        android:text=""
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/comment_home_icon"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/likeid"
+        app:layout_constraintTop_toBottomOf="@+id/postImgFeed"
+         />
+
+    <TextView
+        android:id="@+id/shareid"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text=""
+        android:drawableLeft="@drawable/share_home_home"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@+id/commentid"
+        app:layout_constraintTop_toBottomOf="@+id/postImgFeed"
+         />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#7C5555"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shareid" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

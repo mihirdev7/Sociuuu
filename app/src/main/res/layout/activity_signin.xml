@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".signinActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register Here"
+        android:textSize="30dp"
+        android:layout_marginBottom="90dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_margin="10sp"
+        android:hint="Enter Name"
+        android:id="@+id/reg_name"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:layout_marginBottom="10dp"
+        android:hint="Enter E-mail"
+        android:inputType="textEmailAddress"
+        android:id="@+id/reg_email"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:hint="Enter phone"
+        android:inputType="number"
+        android:id="@+id/reg_phone"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:hint="Enter password"
+        android:layout_margin="10sp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:id="@+id/reg_pass"/>
+
+    <Button
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textSize="20sp"
+        android:id="@+id/regstrAct_btn"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/signtext"
+        android:textSize="15sp"
+        android:layout_height="wrap_content"
+        android:paddingTop="10sp"
+        android:text="Click here to logIn" />
+</LinearLayout>
