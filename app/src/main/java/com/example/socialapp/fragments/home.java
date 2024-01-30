@@ -1,10 +1,8 @@
 package com.example.socialapp.fragments;
 
-import static com.example.socialapp.R.id.commentid;
-import static com.example.socialapp.R.id.imageView;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -20,12 +18,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.socialapp.R;
 //import com.example.socialapp.adapters.feedAdapterHome;
-import com.example.socialapp.adapters.PostAdapterHome;
+import com.example.socialapp.adapters.FeedAdapterHome;
 import com.example.socialapp.adapters.storyAdapterHome;
 //import com.example.socialapp.models.homeFeedModel;
 import com.example.socialapp.models.PostModel;
@@ -52,6 +49,7 @@ public class home extends Fragment {
     RecyclerView Recyid,recyfeed;
     ImageView imageView5,imageView2,profileicnfeed,imgcir;
     ArrayList<storyModel> llist;
+    FeedAdapterHome adapterHome;
    ArrayList<PostModel> feedlist;
     ProgressDialog dialog;
 
@@ -61,6 +59,8 @@ public class home extends Fragment {
    FirebaseDatabase database;
    ActivityResultLauncher<String> gallerylauncher;
     authInfoSignInModel k;
+    private static final int code=1;
+
     public home(){
     }
 
@@ -76,6 +76,8 @@ public class home extends Fragment {
         imageView2=view.findViewById(R.id.imageView2);
         profileicnfeed=view.findViewById(R.id.profileicnfeed);
         dialog=new ProgressDialog(getContext());
+        recyfeed=view.findViewById(R.id.recyfeed);
+        feedlist=new ArrayList<>();
 
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setTitle("Uploading");
@@ -93,6 +95,8 @@ public class home extends Fragment {
                         Picasso.get()
                                 .load(k.getProfilePhoto())
                                 .into(profileicnfeed);
+                        Picasso.get().load(k.getProfilePhoto())
+                                .into(imageView2);
                     }
 
                     @Override
@@ -104,8 +108,10 @@ public class home extends Fragment {
         profileicnfeed.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+
                 Dialog dg=new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
                 dg.setContentView(R.layout.profile_circleimg);
+
                  imgcir=dg.findViewById(R.id.imgcircle);
                 Picasso.get().load(k.getProfilePhoto()).into(imgcir);
                 imgcir.setOnClickListener(new View.OnClickListener() {
@@ -160,13 +166,10 @@ public class home extends Fragment {
 
 
         //===============================================feed show code==================================================
-        recyfeed=view.findViewById(R.id.recyfeed);
-        feedlist=new ArrayList<>();
-        PostAdapterHome adapterHome=new PostAdapterHome(feedlist,getContext());
+        adapterHome=new FeedAdapterHome(feedlist,getContext());
         LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext());
         recyfeed.setLayoutManager(linearLayoutManager1);
         recyfeed.setAdapter(adapterHome);
-
 
         database.getReference().child("posts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -200,7 +203,7 @@ public class home extends Fragment {
                         dialog.show();
                      final StorageReference reference=storage.getReference()
                              .child("stories").child(FirebaseAuth.getInstance().getUid())
-                             .child(new Date().getTime()+"");
+                             .child(String.valueOf(new Date().getTime()));
                      reference.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                          @Override
                          public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -240,4 +243,15 @@ public class home extends Fragment {
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==1){
+            if (grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            }else {
+                Toast.makeText(getContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+    }
 }

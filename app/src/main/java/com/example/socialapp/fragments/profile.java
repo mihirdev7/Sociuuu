@@ -1,6 +1,7 @@
 package com.example.socialapp.fragments;
 
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,8 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.socialapp.MainActivity;
 import com.example.socialapp.R;
 import com.example.socialapp.adapters.friendAdapterProfile;
+import com.example.socialapp.loginActivity;
 import com.example.socialapp.models.authInfoSignInModel;
 import com.example.socialapp.models.profileFriendListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,13 +40,12 @@ import java.util.ArrayList;
 public class profile extends Fragment {
     RecyclerView recyprofilefriends;
     ArrayList<profileFriendListModel> list;
-    ImageView prosetimg,imageView,prosetimg2,imageView3;
+    ImageView coversetimg,imageView,prosetimg2,imageView3;
     TextView textView6,textView10;
     private FirebaseAuth auth;
     private FirebaseStorage storage;
     private FirebaseDatabase database;
-    public profile() {
-    }
+    public profile() {}
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,7 @@ public class profile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_profile, container, false);
-        prosetimg=view.findViewById(R.id.prosetimg);
+        coversetimg =view.findViewById(R.id.coversetimg);
         imageView=view.findViewById(R.id.imageView);
         prosetimg2=view.findViewById(R.id.prosetimg2);
         imageView3=view.findViewById(R.id.imageView3);
@@ -75,13 +77,12 @@ public class profile extends Fragment {
                                     authInfoSignInModel model=snapshot.getValue(authInfoSignInModel.class);
                                     Picasso.get()
                                             .load(model.getCoverPhoto())
-                                            .placeholder(R.drawable.profileicon)
                                             .into(imageView);
                                     Picasso.get().load(model.getProfilePhoto())
                                                     .placeholder(R.drawable.profileicon)
                                                             .into(imageView3);
                                     textView6.setText(model.getName());
-                                    textView10.setText(model.getFollowerCount()+"");
+                                    textView10.setText(String.valueOf(model.getFollowerCount()));
                                 }
                             }
                             @Override
@@ -113,23 +114,52 @@ public class profile extends Fragment {
 
                     }
                 });
-        prosetimg.setOnClickListener(new View.OnClickListener() {
+        coversetimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent,1);
+                AlertDialog.Builder abc = new AlertDialog.Builder(getContext());
+                abc.setTitle("Change cover picture?");
+                abc.setMessage("Are you sure want to change?");
+                abc.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent=new Intent();
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        intent.setType("image/*");
+                        startActivityForResult(intent,1);
+                       }
+                });
+                abc.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+
             }
         });
 
         prosetimg2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent();
-                i.setAction(Intent.ACTION_GET_CONTENT);
-                i.setType("image/*");
-                startActivityForResult(i,2);
+                AlertDialog.Builder abcd = new AlertDialog.Builder(getContext());
+                abcd.setTitle("Change Profile picture?");
+                abcd.setMessage("Are you sure want to change?");
+                abcd.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i=new Intent();
+                        i.setAction(Intent.ACTION_GET_CONTENT);
+                        i.setType("image/*");
+                        startActivityForResult(i,2);  }
+                });
+                abcd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+
             }
         });
         return view;
@@ -138,6 +168,10 @@ public class profile extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(data==null){
+            Toast.makeText(getContext(), "Please select an image!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (requestCode==1){
             if (data.getData()!=null){
                 Uri uri=data.getData();

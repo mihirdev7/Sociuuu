@@ -34,7 +34,7 @@ import java.util.Date;
 public class CommentActivity extends AppCompatActivity {
     EditText writecmtid;
     ImageView cmtimg,cmtprofileimg,imageView7;
-    TextView cmtnametxt,cmtdisctxt,cmtlikeid,commentid,cmtshareid;
+    TextView cmtnametxt,cmtdisctxt,cmtlikeid,commentid;
     androidx.appcompat.widget.Toolbar toolbar2;
     RecyclerView recycmt;
     Intent intent;
@@ -55,7 +55,6 @@ public class CommentActivity extends AppCompatActivity {
         cmtdisctxt=findViewById(R.id.cmtdisctxt);
         cmtlikeid=findViewById(R.id.cmtlikeid);
         commentid=findViewById(R.id.commentid);
-        cmtshareid=findViewById(R.id.cmtshareid);
         recycmt=findViewById(R.id.recycmt);
         imageView7=findViewById(R.id.imageView7);
         auth=FirebaseAuth.getInstance();
@@ -96,8 +95,8 @@ public class CommentActivity extends AppCompatActivity {
                                 .placeholder(R.drawable.profileicon)
                                 .into(cmtimg);
                         cmtdisctxt.setText(model.getPostDescription());
-                        cmtlikeid.setText(model.getPostLikes()+"");
-                        commentid.setText(model.getCommentsCount()+"");
+                        cmtlikeid.setText(String.valueOf(model.getPostLikes()));
+                        commentid.setText(String.valueOf(model.getCommentsCount()));
                     }
 
                     @Override

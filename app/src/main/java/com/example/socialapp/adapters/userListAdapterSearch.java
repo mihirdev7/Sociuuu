@@ -56,7 +56,7 @@ public class userListAdapterSearch extends RecyclerView.Adapter<userListAdapterS
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
-                            holder.followbtn.setBackgroundResource(R.drawable.following_btn_design_search);
+                            holder.followbtn.setBackgroundColor(context.getColor(R.color.white));
                             holder.followbtn.setText("Following");
                             holder.followbtn.setTextColor(context.getColor(R.color.black));
                             holder.followbtn.setEnabled(false);
@@ -79,7 +79,7 @@ public class userListAdapterSearch extends RecyclerView.Adapter<userListAdapterS
                                                                 @Override
                                                                 public void onSuccess(Void unused) {
                                                                     Toast.makeText(context, "You followed "+model.getName(), Toast.LENGTH_SHORT).show();
-                                                                    holder.followbtn.setBackgroundResource(R.drawable.following_btn_design_search);
+                                                                    holder.followbtn.setBackgroundColor(context.getColor(R.color.white));
                                                                     holder.followbtn.setText("Following");
                                                                     holder.followbtn.setTextColor(context.getColor(R.color.black));
                                                                     holder.followbtn.setEnabled(false);

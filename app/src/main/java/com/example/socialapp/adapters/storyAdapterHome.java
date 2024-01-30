@@ -76,14 +76,13 @@ public class storyAdapterHome extends RecyclerView.Adapter<storyAdapterHome.view
     }
 
     public class viewHolder extends RecyclerView.ViewHolder{
-        ImageView imageView2,profidStory,liveid;
+        ImageView imageView2,profidStory;
         TextView textView4;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             imageView2=itemView.findViewById(R.id.imageView2);
             profidStory=itemView.findViewById(R.id.profidStory);
-            liveid=itemView.findViewById(R.id.liveid);
             textView4=itemView.findViewById(R.id.textView4);
         }
     }

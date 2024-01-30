@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.framel,new home()).addToBackStack("fragment1").commit();
 
         findViewById(R.id.toolbar).setVisibility(View.GONE);
+
+        if(!internetStatus.isInternetAvailable(this)) {
+            AlertDialog.Builder ab = new AlertDialog.Builder(this);
+            ab.setTitle("NO CONNECTION");
+            ab.setMessage("Please Turn On Internet");
+            ab.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {}
+            }).show();
+        }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -95,20 +107,32 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+      //=======================below code is for signout that placed in profile and add using menu option
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.profile_settingicon,menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.setting){
-            auth.signOut();
-            Intent intent=new Intent(MainActivity.this,loginActivity.class);
-            startActivity(intent);
-            finish();
+            AlertDialog.Builder abc = new AlertDialog.Builder(this);
+            abc.setTitle("LOGOUT?");
+            abc.setMessage("Are you sure want to logout?");
+            abc.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    auth.signOut();
+                    Intent intent=new Intent(MainActivity.this,loginActivity.class);
+                    startActivity(intent);
+                    finish();}
+            });
+            abc.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -157,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onBackPressed();
     }
+
+
 }
    /* viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

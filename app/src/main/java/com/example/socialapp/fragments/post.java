@@ -109,13 +109,13 @@ public class post extends Fragment {
                public void onTextChanged(CharSequence s, int start, int before, int count) {
                    String desc=discpost.getText().toString();
                    if(!desc.isEmpty()){
-                       postbtn.setBackgroundResource(R.drawable.follow_bg_search);
+                       postbtn.setBackgroundResource(R.color.red);
                        postbtn.setText("Post");
                        postbtn.setEnabled(true);
                        postbtn.setTextColor(getContext().getColor(R.color.white));
                    }else{
                        if(desc.isEmpty()){
-                           postbtn.setBackgroundResource(R.drawable.following_btn_design_search);
+                           postbtn.setBackgroundResource(R.drawable.circle_iconborder);
                            postbtn.setText("Post");
                            postbtn.setTextColor(getContext().getColor(R.color.grey));
                            postbtn.setEnabled(false);
@@ -142,7 +142,7 @@ public class post extends Fragment {
                public void onClick(View v) {
                    dialog.show();
                    final StorageReference reference= storage.getReference().child("Posts")
-                           .child(FirebaseAuth.getInstance().getUid()).child(new Date().getTime()+"");
+                           .child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(new Date().getTime()));
                    reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                        @Override
                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -162,6 +162,9 @@ public class post extends Fragment {
                                               public void onSuccess(Void unused) {
                                                   Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
                                                   dialog.dismiss();
+                                                  discpost.setText(null);
+                                                  imageView8.setImageDrawable(null);
+
                                               }
                                           });
                                 }
@@ -183,7 +186,7 @@ public class post extends Fragment {
         uri=data.getData();
         imageView8.setImageURI(uri);
             imageView8.setVisibility(View.VISIBLE);
-            postbtn.setBackgroundResource(R.drawable.follow_bg_search);
+            postbtn.setBackgroundResource(R.color.red);
             postbtn.setText("Post");
             postbtn.setEnabled(true);
             postbtn.setTextColor(getContext().getColor(R.color.white));

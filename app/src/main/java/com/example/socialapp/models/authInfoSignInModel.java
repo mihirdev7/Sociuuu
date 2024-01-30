@@ -4,7 +4,7 @@ public class authInfoSignInModel {
     private String Name,Email,Pass,Number;
     private String coverPhoto;
     private String profilePhoto,UserID;
-    private  int followerCount;
+    private  int FollowerCount;
     public authInfoSignInModel(String name, String email, String pass, String number) {
         Name = name;
         Email = email;
@@ -74,10 +74,10 @@ public class authInfoSignInModel {
     }
 
     public int getFollowerCount() {
-        return followerCount;
+        return FollowerCount;
     }
 
     public void setFollowerCount(int followerCount) {
-        this.followerCount = followerCount;
+        this.FollowerCount = followerCount;
     }
 }
