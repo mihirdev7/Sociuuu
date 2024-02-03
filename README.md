@@ -15,7 +15,7 @@ A social media app that leverages Firebase for data storage, authentication, and
 
 - **Firebase Authentication**: For secure user authentication.
 - **Firebase Firestore**: Cloud Firestore for storing and managing user data and posts.
-- - **Firebase Real Time Database**:  for storing real time database and managing those data.
+- **Firebase Real Time Database**:  for storing real time database and managing those data.
 
 
 ![Feed_Image](https://github.com/mihirdev7/Sociuu/assets/143248297/e04fd654-2493-4869-adf6-7e89a6113b3d)
