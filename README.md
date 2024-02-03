@@ -1,5 +1,22 @@
-# Sociuu
-A simple Social Media app that created using java and firebase and includes all the functionalities like Authentication, Feed, Story, Profile, Notification, Search etc. 
+# Social Media App
+
+A social media app that leverages Firebase for data storage, authentication, and notifications. Connect with friends, share posts, and stay updated with real-time notifications.
+
+## Features
+
+- **User Authentication**: Secure user authentication using Firebase Authentication.
+- **Home Feed**: View a personalized feed of posts from friends.
+- **Follow Users**: Follow friends and stay connected with their updates.
+- **Create and Share Posts**: Share your thoughts, photos, and more with the community.
+- **User Profiles**: Personalized user profiles with a history of posts and followers.
+- **Real-time Notifications**: Receive instant notifications for new likes, comments, and follows.
+
+## Technologies Used
+
+- **Firebase Authentication**: For secure user authentication.
+- **Firebase Firestore**: Cloud Firestore for storing and managing user data and posts.
+- - **Firebase Real Time Database**:  for storing real time database and managing those data.
+
 
 ![Feed_Image](https://github.com/mihirdev7/Sociuu/assets/143248297/e04fd654-2493-4869-adf6-7e89a6113b3d)
 ![Commment_IMage](https://github.com/mihirdev7/Sociuu/assets/143248297/1ff13fe3-151d-472a-91e3-78d61917a901)
